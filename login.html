@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    @media (max-width: 600px) {
+  form {
+    width: 80%;
+    font-family: 'Comfortaa', cursive;
+  }
+}
+    body {
+  display: flex;
+  flex-direction: row;
+  align-items: right;
+  justify-content: right;
+  height: auto;
+  font-family: 'Comfortaa', cursive;
+    }
+
+   .login-container {
+  display: flex;
+  flex-direction: row;
+  align-items: right;
+  justify-content: right;
+  height: auto;
+  font-family: 'Comfortaa', cursive;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  width: 300px;
+  font-family: 'Comfortaa', cursive;
+}
+
+label, input[type="submit"] {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+input[type="text"], input[type="password"] {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px;
+  width: 100%;
+}
+
+input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px;
+  font-family: 'Comfortaa', cursive;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+  </style>
+</head>
+<body>
+  <p id="welcome-message" style="display:none;">Hello, <span id="email-display"></span>!</p>
+  LOGIN
+  <div class="login-container">
+    <form action="/login" method="post">
+      <label for="email">Email:</label><br>
+      <input type="text" id="email" name="email"><br>
+      <label for="password">Password:</label><br>
+      <input type="password" id="password" name="password"><br><br>
+      <input type="submit" value="Submit">
+    </form> 
+  </div>
+</body>
+</html>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyCgRSmjw1iWIcAVMXg5cd6Yic7cW69G15c",
+    authDomain: "onid-1.firebaseapp.com",
+    projectId: "onid-1",
+    storageBucket: "onid-1.appspot.com",
+    messagingSenderId: "23407192164",
+    appId: "1:23407192164:web:7bb33752c48b7cf1769771",
+    measurementId: "G-R6Z1SPWMJV"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+
+
+<!-- Add a script to handle the login process -->
+
+   document.getElementById('login-container').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent the form from being submitted
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
+      // Redirect to the new page
+      window.location = '/welcome.html';
+    }).catch(function(error) {
+      // Display an error message if the login fails
+      document.getElementById('login-form').innerHTML = '<p>User not found</p>';
+    });
+  });
+</script>
