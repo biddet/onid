@@ -1,0 +1,6 @@
+<p id="welcome-message">Hello, <span id="email-display"></span>!</p>
+
+<!-- Add a script to set the text content of the element -->
+<script>
+  document.getElementById('email-display').textContent = firebase.auth().currentUser.email;
+</script>
